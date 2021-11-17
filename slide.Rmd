@@ -106,7 +106,7 @@ __作業の最終工程であるドキュメント作成を流れの起点にす
 <br></br>
 `r emo::ji("check")` ブランチングでの共同開発履歴の例（本プレゼン資料）
 ```{r out.width = "700px", fig.align = "center", echo = FALSE} 
-    knitr::include_graphics("figures/network_graph_s.png")
+    knitr::include_graphics("figures/network_graph_focused.png")
 ```
 
 
