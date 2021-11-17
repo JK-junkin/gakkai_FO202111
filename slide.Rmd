@@ -104,7 +104,7 @@ __作業の最終工程であるドキュメント作成を流れの起点にす
 
 `r emo::ji("scorpion")` このツールの仕組みの理解および取扱技術の習得が必要  
 <br></br>
-`r emo::ji("check")` GitHub上での共同開発履歴の例（本プレゼン資料）
+`r emo::ji("check")` ブランチングでの共同開発履歴の例（本プレゼン資料）
 ```{r out.width = "700px", fig.align = "center", echo = FALSE} 
     knitr::include_graphics("figures/network_graph_s.png")
 ```
