@@ -1,0 +1,109 @@
+---
+title: "example"
+author: "木下順二・真鍋明弘・市野川桃子（水産機構資源研）"
+output: bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(magrittr)
+library(ggplot2)
+```
+
+```{r, fig.height = 5, fig.width = 7, echo = FALSE}
+# Define data
+
+BL <-
+  c(36, 37, 39, 40, 40, 40, 41, 41, 42, 42, 42, 43, 43, 43, 44, 45, 45, 46, 46,
+    46, 46, 47, 47, 47, 48, 48, 48, 48, 49, 49, 50, 50, 50, 50, 50, 51,51, 51,
+    52, 52, 52, 52, 52, 53, 53, 53, 53, 53, 53, 54, 54, 54, 55, 55, 55, 55, 56,
+    56, 58, 61)
+  
+BW <-
+  c(440, 460, 510, 630, 810, 600, 560, 650, 670, 740, 790, 670, 740, 760, 910,
+    900, 810, 1240, 930, 810, 960, 990, 960, 890, 1280, 1070, 1030, 970, 1260,
+    1140, 1320, 1020, 1210, 1190, 1210, 1520, 1460, 1440, 1470, 1480, 1430,
+    1390, 1370, 1460, 1320, 1250, 1390, 1320, 1410, 1360, 1410, 1510, 1600,
+    1550, 1660, 1460, 1700, 1580, 2000, 2420)
+
+dat <- tibble::tibble(BL = BL, BW = BW)
+```
+
+# 使用データについて
+
+本解析にはとある魚種の体長(単位mm)と体重(単位g)のデータを用いている。 (図 \@ref(fig:lwplot))
+使用するデータ数は _n_ = `r nrow(dat)` である。
+また、最大体長は `r max(dat$BL)` mm であり、最小体長は `r min(dat$BL)` mm であった。
+最大重量は `r max(dat$BW)` mm であり、最小重量は `r min(dat$BW)` mm であった。
+
+```{r lwplot, fig.cap = "体長と体重のプロット", fig.height = 4, fig.width = 5, echo = FALSE}
+ggplot(dat) +
+  geom_point(aes(x = BL, y = BW)) +
+  theme_bw(base_size = 14) +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+
+```
+
+# 体長-体重関係について
+
+```{r, echo = FALSE}
+# Define a function that estimates W-L relationship
+
+estimate_lw <- function(dat.length, dat.weight) {
+  nls(dat.weight ~ a * dat.length^b, start = list(a = 0.001, b = 3)) %>%
+    summary() %>%
+    .$coefficients %>%
+    data.table::as.data.table()
+}
+```
+
+体長-体重関係は
+
+$$
+BW = a * BL ^ b
+$$
+
+を定義した。
+解析には __R__ 言語 の `nls` パッケージを用いて解析した。
+
+# 解析結果
+
+```{r, res, echo = FALSE}
+# Estimate W-L relationship
+res <- estimate_lw(dat.length = dat$BL, dat.weight = dat$BW)
+```
+
+解析結果を以下に示す(表 \@ref(tab:params))。
+推定された係数 _a_ は `r res$Estimate[1]` であり、べき乗数 _b_ は `r res$Estimate[2]` であった。
+
+```{r, params, echo = FALSE}
+# Paste parameter table
+tibble::as_tibble(res) %>% 
+  knitr::kable(
+    caption = "Parameters of W-L relationship",
+    format = "html",
+    booktabs = TRUE)
+```
+
+また、推定された体長-体重関係をデータにプロットしたところ当てはまりは良かった (図 \@ref(fig:estimplot))。
+
+```{r, estimplot, fig.cap = "推定された体長-体重関係", fig.height = 4, fig.width = 5, echo = FALSE}
+
+# Draw a graph
+
+res <- estimate_lw(dat.length = dat$BL, dat.weight = dat$BW)
+
+ggplot(dat) +
+  geom_point(aes(x = BL, y = BW)) +
+  stat_function(
+    fun = function(x)
+      res$Estimate[1] * x ^ res$Estimate[2],
+    color = "blue") +
+  theme_bw(base_size = 14) +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+
+
+```
+
