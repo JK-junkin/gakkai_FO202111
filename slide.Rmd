@@ -278,6 +278,16 @@ cap <- glue::glue(
 * `example.html`をダブルクリックしてどのようなドキュメントが生成されたかを
   確認してみて下さい。または `example.Rmd` を適当に改変してみて下さい。
 
+# __本発表資料の作成について__ {.smaller}
+* 本発表の資料（スライド）は __Rmarkdown__, __Git__, __GitHub__ を用いて複数人で同時作成しました。
+発表資料作成に使用したコードは[GitHubの公開レポジトリ](https://github.com/JK-junkin/gakkai_FO202111)に格納されています。
+
+Githubリンク：https://github.com/JK-junkin/gakkai_FO202111
+
+```{r echo = FALSE, out.width = "800px", fig.align = "center"}
+    knitr::include_graphics("figures/githubrepo.png")
+```
+
 # __参考文献・サイト等__ {.smaller}
 * Hayashi A, Ichinokawa M, Kinoshita J, Manabe A (2021)  
   Optimizing stock assessment workflows by applying software development methodology.  
