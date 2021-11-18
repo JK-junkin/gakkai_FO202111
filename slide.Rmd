@@ -5,13 +5,14 @@ date: "Nov. 20, 2021"
 output:
     slidy_presentation:
         theme: sandstone
-        font_adjustment: +2
+        font_adjustment: +0
         incremental: false
         css: style.css
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      class.source = "numberLines lineAnchors")
 #     powerpoint_presentation:
 #         reference_doc: ref.potx
 image_link <- function(image,url,...){
@@ -221,7 +222,7 @@ cap <- glue::glue(
   4. 後工程から前工程にタスクを取りに行く  
   5. 流転するユーザーの要求を完全に満たすよう改善を続ける  
 
-　　の5項目から成ります。  
+　　の5項目から成ります（Hayashi et al. 2021）。  
 
 * リーン生産方式の元となったのは、トヨタ自動車が自動車製造の現場で昭和20年代初頭から  
   実践・改善し続けているトヨタ生産方式に由来するようです。  
@@ -254,7 +255,40 @@ cap <- glue::glue(
 
 などの継続的な行動と、強い意思が必要だと考えています。
 
-# __参考文献・サイト等__
+# __Rmarkdownファイルのサンプル__ {.smaller}
+* 数値計算および文章中への数値引用例を示したRmarkdownファイルサンプル（`example.Rmd`）を
+  この[リンク先](https://raw.githubusercontent.com/JK-junkin/gakkai_FO202111/main/example.Rmd)からダウンロードできます。
+　生コードをコピーし、Rファイルに張り付けて保存してください（このとき拡張子は __.Rmd__ で保存してください）。
+
+```{r echo = FALSE, out.width = "800px", fig.align = "center"}
+    knitr::include_graphics("figures/examplecode.png")
+```
+
+* ダウンロード後、`R`（または __RStudio__ などのR用IDE）を立ち上げて下記の２つのコードを実行すると、
+  `example.Rmd`があるフォルダに`example.html`が生成できるはずです。
+  
+    ```{r eval = FALSE}
+    # 必要なパッケージをダウンロード・インストール
+    install.packages(c("tidyverse", "rmarkdown", "bookdown"))
+
+    # 今回はHTMLフォーマットで生成する設定
+    rmarkdown::render("example.Rmd")
+    ```
+  
+* `example.html`をダブルクリックしてどのようなドキュメントが生成されたかを
+  確認してみて下さい。または `example.Rmd` を適当に改変してみて下さい。
+
+# __本発表資料の作成について__ {.smaller}
+* 本発表の資料（スライド）は __Rmarkdown__, __Git__, __GitHub__ を用いて複数人で同時作成しました。
+発表資料作成に使用したコードは[GitHubの公開レポジトリ](https://github.com/JK-junkin/gakkai_FO202111)に格納されています。
+
+Githubリンク：https://github.com/JK-junkin/gakkai_FO202111
+
+```{r echo = FALSE, out.width = "800px", fig.align = "center"}
+    knitr::include_graphics("figures/githubrepo.png")
+```
+
+# __参考文献・サイト等__ {.smaller}
 * Hayashi A, Ichinokawa M, Kinoshita J, Manabe A (2021)  
   Optimizing stock assessment workflows by applying software development methodology.  
   Fisheries Research, 244, 106108. https://doi.org/10.1016/J.FISHRES.2021.106108  
@@ -263,7 +297,13 @@ cap <- glue::glue(
   『トヨタ生産方式—脱規模の経営を目指して—』ダイヤモンド社. pp.232.
 
 * 高橋康介 (2018)  
-  『再現可能性のすゝめ—RStudioによるデータ解析とレポート作成—』.  
+  『再現可能性のすゝめ—RStudioによるデータ解析とレポート作成—』  
   Wonderful R vol.3, 石田基広監修. 共立出版. pp.161.
 
-* 
+* Jennifer Davis, Ryn Daniels 著, 吉羽龍太郎 監訳, 長尾高弘 訳 (2018)  
+  『Effective DevOps—4本柱による持続可能な組織文化の育て方—』  
+  オライリー・ジャパン. pp.341.
+
+* 市谷聡啓, 新井剛 (2018)  
+  『カイゼン・ジャーニー—たった1人からはじめて、「越境」するチームをつくるまで—』  
+  翔泳社. pp.279.

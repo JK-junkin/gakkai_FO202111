@@ -34,7 +34,7 @@ dat <- tibble::tibble(BL = BL, BW = BW)
 本解析にはとある魚種の体長(単位mm)と体重(単位g)のデータを用いている。 (図 \@ref(fig:lwplot))
 使用するデータ数は _n_ = `r nrow(dat)` である。
 また、最大体長は `r max(dat$BL)` mm であり、最小体長は `r min(dat$BL)` mm であった。
-最大重量は `r max(dat$BW)` mm であり、最小重量は `r min(dat$BW)` mm であった。
+最大重量は `r max(dat$BW)` g であり、最小重量は `r min(dat$BW)` g であった。
 
 ```{r lwplot, fig.cap = "体長と体重のプロット", fig.height = 4, fig.width = 5, echo = FALSE}
 ggplot(dat) +
