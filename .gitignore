@@ -1,1 +1,4 @@
 *.html
+*.log
+*.tex
+.DS_Store
