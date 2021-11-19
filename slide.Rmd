@@ -20,11 +20,18 @@ CJKfontoptions: Scale=1
 urlcolor: blue
 header-includes: |
   \usepackage{zxjatype}
+  \addtobeamertemplate{navigation symbols}{}{%
+    \usebeamerfont{footline}%
+    \usebeamercolor[fg]{fg=lightgray}%
+    \hspace{5em}%
+    \scriptsize\insertframenumber/\inserttotalframenumber
+  }
 ---
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
                       class.source = "numberLines lineAnchors")
+#   \setlength{\topmargin}{-3cm}
+#   \pagestyle{plain}
 ```
 
 ## __背景と着眼__
@@ -105,7 +112,7 @@ __作業の最終工程であるドキュメント作成を流れの起点にす
 
 \textcolor[rgb]{1,0,0}{！このツールの仕組みの理解および取扱技術の習得が必要}
 
-* ブランチングでの共同開発履歴の例（本スライド資料）
+* ブランチングによる共同開発履歴の例（本発表資料）
 ```{r out.width = "300pt", fig.align = "center"}
     knitr::include_graphics("figures/network_graph_focused.png")
 ```
@@ -229,16 +236,16 @@ cap <- glue::glue(
       誰でも（例えば新人でも）資源評価が出来るようにする
     * 魚種横断的な標準化まで行えれば、効率はさらに上がる  
 
-●なお、ここで言う標準化とは、(1) 各工程の作業時間、(2) 各工程の作業順序、  
-　(3) 作業に必要最少な道具の種類、を定めることです。
+●なお、ここで言う標準化とは、（1）各工程の作業時間、（2）各工程の作業順序、  
+　（3）作業に必要最少な道具の種類、を定めることです。
 
 ## __参考｜リーン生産方式__
 * 本資料で示した方法はソフトウェア開発現場で用いられているリーン生産方式  
   （ムダの少ない生産方式）を参考にしています。  
   そのコンセプトは、次の5項目から成ります（Hayashi et al. 2021）。  
 
-    1. プロジェクトの __価値__ を明確にする
-    2. __価値の流れ__ を明確にする
+    1. プロジェクト（製品）の __価値__ を明確にする
+    2. __価値の流れ__ （バリューストリーム）を見える化する
     3. 工程間の作業速度を可能な限り均すことで __流れを止めない__
     4. __後工程から前工程に__ タスクを取りに行く
     5. 流転するユーザーの要求を完全に満たすよう改善を __続ける__
@@ -295,7 +302,7 @@ cap <- glue::glue(
 
     \scriptsize
     ```{r eval = FALSE, echo = TRUE}
-    install.packages(c("tidyverse", "rmarkdown", "bookdown")) # 1回でよい
+    install.packages(c("tidyverse", "rmarkdown", "bookdown")) # 初回のみ実行
     rmarkdown::render("example.Rmd")                          # 文書生成の命令
     ```
     \small
